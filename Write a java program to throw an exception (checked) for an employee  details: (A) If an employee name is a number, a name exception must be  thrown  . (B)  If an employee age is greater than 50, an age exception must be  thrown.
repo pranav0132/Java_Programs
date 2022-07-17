@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+class AgeException extends Exception {
+
+    public AgeException(String str) {
+        System.out.println(str);
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Enter your name: ");
+            String name = sc.nextLine();
+            try {
+                Integer.parseInt(name);
+                System.out.println("Integer ");
+                throw new Exception("We can not take name in numbers");
+            } catch (NumberFormatException e) {
+                System.out.println("String ");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try (
+
+                    Scanner s = new Scanner(System.in)) {
+                System.out.print("Enter ur age :: ");
+                int age = s.nextInt();
+
+                try {
+                    if (age < 18)
+                        throw new AgeException("Invalid age");
+                    else if (age > 50)
+                        throw new AgeException("Invalid age");
+                    else
+                        System.out.println("Valid age");
+                } catch (AgeException a) {
+                    System.out.println(a);
+                }
+            }
+        }
+    }
+}
